@@ -1,0 +1,196 @@
+import React, { memo, useState } from "react";
+import { makeStyles, Container, TextField, Grid, Button } from "@material-ui/core"
+
+const contact = (props) => {
+    const classes = useStyles();
+    return (
+        <div className={classes.container}>
+            <div className={classes.header}></div>
+            <div className={classes.contactForm}>
+                <form className={classes.form}>
+                    <div className={classes.text}>Hoặc liên hệ với chúng tôi bằng cách điền vào biểu mẫu sau:</div>
+                    <Grid container spacing={3}>
+                        <Grid item xs={12}>
+                            <TextField
+                                id="outlined-name-input"
+                                type="text"
+                                name="name"
+                                variant="outlined"
+                                placeholder="Tên của bạn"/>
+                            <TextField
+                                id="outlined-company-input"
+                                type="text"
+                                name="company"
+                                variant="outlined"
+                                placeholder="Tên công ty"/>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                id="outlined-email-input"
+                                type="email"
+                                name="email"
+                                autoComplete="email"
+                                variant="outlined"
+                                placeholder="Email"/>
+                            <TextField
+                                id="outlined-phone-input"
+                                type="text"
+                                name="phone"
+                                variant="outlined"
+                                placeholder="Số điện thoại"/>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField className={classes.description}
+                                id="outlined-description-input"
+                                type="text"
+                                name="description"
+                                variant="outlined"
+                                placeholder="Mô tả nội dung yêu cầu của bạn"/>
+                        </Grid>
+                    </Grid>
+                    <div className={classes.note}>Vui lòng điền đầy đủ thông tin ở các trường</div>
+                    <Button>Gửi</Button>
+                </form>
+                <img src="../../static/images/contact/contact.png" className={classes.image}/>
+            </div>
+            <div className={classes.footer}></div>
+        </div>
+    )
+}
+
+const useStyles = makeStyles(theme => ({
+    container: {
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+        overflowY: "scroll",
+        overflowX: "hidden"
+    }, 
+    header: {
+        height: "379px",
+        minHeight: "379px",
+        background: "linear-gradient(270deg, #2844EB 0%, #5C39E7 100%)"
+    },
+    footer: {
+        height: "372px",
+        minHeight: "372px",
+        background: "linear-gradient(72.67deg, #420A79 0.85%, #2525A3 100%)",
+        opacity: "0.3"
+    },
+    contactForm: {
+        flexGrow: "2",
+        position: "relative"
+    },
+    text: {
+        fontSize: "16px",
+        fontWeight: "500",
+        fontFamily: "Inter",
+        lineHeight: "24px",
+        color: "#3B404C",
+        padding: "48px 12px 54px",
+        [theme.breakpoints.down("xs")]: {
+            paddingBottom: "36px"
+        }
+    },
+    note: {
+        fontSize: "16px",
+        fontWeight: "400",
+        fontFamily: "Inter",
+        lineHeight: "22px",
+        color: "#3B404C",
+        padding: "16px 0 16px 12px",
+        marginLeft: "20%",
+        [theme.breakpoints.down("xs")]: {
+            display: "none"
+        }
+    },
+    image: {
+        position: "absolute",
+        bottom: "0",
+        right: "0",
+        zIndex: "-1",
+        [theme.breakpoints.down("xs")]: {
+            position: "relative",
+            width: "484px",
+            height: "340px",
+            right: "110px"
+        }
+    },
+    form: {
+        paddingLeft: "13.5%",
+        display: "flex",
+        flexDirection: "column",
+        [theme.breakpoints.down("xs")]: {
+            padding: "0",
+        },
+        '& .MuiTextField-root': {
+            height: "46px",
+            background: "#F1F3F6",
+            borderRadius: "5px",
+            maxWidth: "394px",
+            width: "33%",
+            margin: "0 12px",
+            [theme.breakpoints.down("xs")]: {
+                maxWidth: "351px",
+                width: "351px",
+                margin: "12px"
+            }
+        },
+        '& .MuiGrid-item': {
+            [theme.breakpoints.down("xs")]: {
+                padding: "0 12px",
+                textAlign: "center"
+            }
+        },
+        '& .MuiInputBase-root': {
+            height: "100%"
+        },
+        '& .MuiOutlinedInput-input': {
+            padding: "13px 16px",
+            color: "#6C7078",
+            fontSize: "14px",
+            lineHeight: "20px",
+            fontWeight: "400",
+            fontFamily: "Inter",
+            boxSizing: "border-box",
+            height: "100%"
+        },
+        '& .MuiOutlinedInput-notchedOutline': {
+            borderWidth: "0"
+        },
+        '& .MuiButton-text': {
+            color: "#fff",
+            fontSize: "18px",
+            fontWeight: "500",
+            lineHeight: "22px",
+            padding: "0"
+        },
+        '& .MuiButton-root': {
+            background: "#24BDC7",
+            height: "46px",
+            width: "100px",
+            borderRadius: "5px",
+            marginLeft: "30%",
+            padding: "0",
+            marginTop: "10px",
+            marginBottom: "30px",
+            [theme.breakpoints.down("xs")]: {
+                margin: "0 auto",
+                marginTop: "48px",
+                width: "84px"
+            }
+        }
+    },
+    description: {
+        height: "150px !important",
+        maxWidth: "813px !important",
+        width: "68.5% !important",
+        [theme.breakpoints.down("xs")]: {
+            maxWidth: "351px !important",
+            width: "351px !important",
+            marginTop: "18px !important"
+        }
+    },
+}))
+
+export default memo(contact);
