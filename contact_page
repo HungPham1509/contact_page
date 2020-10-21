@@ -1,0 +1,362 @@
+import React, { memo, useState } from "react";
+import {
+  makeStyles,
+  TextField,
+  Grid,
+  Button,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  IconButton,
+} from "@material-ui/core";
+import Header from "../../layouts/components/Header";
+
+const contact = props => {
+  const classes = useStyles();
+  const [openModal, setOpenModal] = useState(false);
+  const [contact, setContact] = useState({
+    name: "",
+    company: "",
+    email: "",
+    phone: "",
+    description: "",
+  });
+  const handleChange = e => {
+    setContact({ ...contact, [e.target.name]: e.target.value });
+  };
+
+  const hanldeSubmitClick = e => {
+    e.preventDefault();
+    handleOpen();
+  };
+
+  const handleOpen = () => {
+    setOpenModal(true);
+  };
+
+  const handleClose = () => {
+    setOpenModal(false);
+  };
+
+  return (
+    <div className={classes.container}>
+      <Header title={CONTACT} description={CONTACT_DESCRIPTION} phone={PHONE} email={EMAIL} />
+      <div className={classes.contactForm}>
+        <form onSubmit={hanldeSubmitClick} className={classes.form}>
+          <div className={classes.text}>Hoặc liên hệ với chúng tôi bằng cách điền vào biểu mẫu sau:</div>
+          <Grid container>
+            <Grid item xs={12}>
+              <TextField
+                id="outlined-name-input"
+                type="text"
+                name="name"
+                variant="outlined"
+                placeholder="Tên của bạn"
+                required
+                onChange={handleChange}
+              />
+              <TextField
+                id="outlined-company-input"
+                type="text"
+                name="company"
+                variant="outlined"
+                placeholder="Tên công ty"
+                onChange={handleChange}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                id="outlined-email-input"
+                type="email"
+                name="email"
+                autoComplete="email"
+                variant="outlined"
+                placeholder="Email"
+                required
+                onChange={handleChange}
+              />
+              <TextField
+                id="outlined-phone-input"
+                type="text"
+                name="phone"
+                variant="outlined"
+                placeholder="Số điện thoại"
+                required
+                onChange={handleChange}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                className={classes.description}
+                id="outlined-description-input"
+                type="text"
+                name="description"
+                variant="outlined"
+                placeholder="Mô tả nội dung yêu cầu của bạn"
+                onChange={handleChange}
+                multiline
+                rowsMax={5}
+                inputProps={{ className: classes.inputField }}
+              />
+            </Grid>
+          </Grid>
+          <div className={classes.note}>Vui lòng điền đầy đủ thông tin ở các trường</div>
+          <Button type="submit">Gửi</Button>
+          <Dialog
+            className={classes.Dialog}
+            open={openModal}
+            onClose={handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <IconButton onClick={handleClose} aria-label="close" className={classes.closeButton}>
+              <img src="../../static/images/icons/close.svg"></img>
+            </IconButton>
+            <img style={{ marginTop: "8px" }} src="../../static/images/icons/confirm.svg"></img>
+            <DialogTitle className={classes.DialogTitle} id="alert-dialog-title">
+              {"Cảm ơn bạn đã liên hệ"}
+            </DialogTitle>
+            <DialogContent className={classes.DialogContent}>
+              <DialogContentText id="alert-dialog-description">
+                Chúng tôi sẽ cố gắng phản hồi sớm nhất có thể!
+              </DialogContentText>
+            </DialogContent>
+          </Dialog>
+        </form>
+        <div className={classes.decoration}>
+          <img src="../../static/images/contact/contact.png" className={classes.image} />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const CONTACT = "Liên hệ";
+const CONTACT_DESCRIPTION = "Bạn cần một giải pháp tối ưu? Hãy liên hệ ngay với chúng tôi để được tư vấn tốt nhất!";
+const PHONE = "+84-24-3204-5456";
+const EMAIL = "contact@bglobalcorp.com";
+
+const useStyles = makeStyles(theme => ({
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1,
+    color: "#fff",
+  },
+  modal: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  inputField: {
+    alignSelf: "baseline",
+    padding: "0 !important",
+  },
+  container: {
+    display: "flex",
+    flexDirection: "column",
+    height: "100%",
+    overflowY: "scroll",
+    overflowX: "hidden",
+  },
+  contactForm: {
+    flexGrow: "2",
+    position: "relative",
+    display: "flex",
+    [theme.breakpoints.down("xs")]: {
+      flexDirection: "column",
+    },
+  },
+  text: {
+    fontSize: "16px",
+    fontWeight: "500",
+    fontFamily: "Inter",
+    lineHeight: "24px",
+    color: "#3B404C",
+    padding: "48px 0 42px",
+    [theme.breakpoints.down(780)]: {
+      padding: "36px 0 24px",
+    },
+    [theme.breakpoints.down("xs")]: {
+      paddingBottom: "36px",
+      paddingLeft: "12px",
+    },
+  },
+  note: {
+    fontSize: "16px",
+    fontWeight: "400",
+    fontFamily: "Inter",
+    lineHeight: "22px",
+    color: "#3B404C",
+    padding: "16px 0 16px 0",
+    textAlign: "center",
+    [theme.breakpoints.down(780)]: {
+      display: "none",
+    },
+  },
+  decoration: {
+    flexGrow: "2",
+    display: "flex",
+    alignItems: "flex-end",
+    justifyContent: "flex-end",
+    [theme.breakpoints.down("xs")]: {
+      marginTop: "300px",
+    },
+  },
+  image: {
+    Width: "633px",
+    maxHeight: "482px",
+    position: "absolute",
+    bottom: "-43px",
+    right: "0",
+    [theme.breakpoints.down(1441)]: {
+      height: "444px",
+      width: "632px",
+      right: "0",
+      bottom: "-43px",
+      zIndex: "-1",
+    },
+    [theme.breakpoints.down(990)]: {
+      height: "auto",
+      width: "482px",
+      minHeight: "376px",
+      minWidth: "532px",
+      bottom: "-36px",
+    },
+    [theme.breakpoints.down("xs")]: {
+      width: "450px",
+      height: "365px",
+    },
+  },
+  form: {
+    marginLeft: "14.3%",
+    display: "flex",
+    flexDirection: "column",
+    width: "814px",
+    [theme.breakpoints.down(1441)]: {
+      width: "60%",
+    },
+    [theme.breakpoints.down("md")]: {
+      marginLeft: "6%",
+    },
+    [theme.breakpoints.down("xs")]: {
+      padding: "0",
+      marginLeft: "0",
+      width: "100%",
+    },
+    "& .MuiGrid-container": {
+      width: "814px",
+      [theme.breakpoints.down(1441)]: {
+        width: "100%",
+      },
+    },
+    "& .MuiTextField-root": {
+      height: "46px",
+      background: "#F1F3F6",
+      borderRadius: "5px",
+      maxWidth: "394px",
+      width: "394px",
+      margin: "0",
+      [theme.breakpoints.down(1441)]: {
+        width: "48.4%",
+      },
+      [theme.breakpoints.down("xs")]: {
+        maxWidth: "351px",
+        width: "351px",
+        margin: "12px 0",
+      },
+    },
+    "& .MuiTextField-root:first-child": {
+      marginRight: "25px",
+      [theme.breakpoints.down(1441)]: {
+        marginRight: "3%",
+      },
+      [theme.breakpoints.down("xs")]: {
+        marginRight: "0",
+      },
+    },
+    "& .MuiGrid-item": {
+      padding: "12px 0",
+      [theme.breakpoints.down("xs")]: {
+        padding: "0 12px",
+        textAlign: "center",
+      },
+    },
+    "& .MuiInputBase-root": {
+      height: "100%",
+    },
+    "& .MuiOutlinedInput-input": {
+      padding: "13px 16px",
+      color: "#6C7078",
+      fontSize: "14px",
+      lineHeight: "20px",
+      fontWeight: "400",
+      fontFamily: "Inter",
+      boxSizing: "border-box",
+      height: "100%",
+    },
+    "& .MuiOutlinedInput-notchedOutline": {
+      borderWidth: "0",
+    },
+    "& .MuiButton-text": {
+      color: "#fff",
+      fontSize: "18px",
+      fontWeight: "500",
+      lineHeight: "22px",
+      padding: "0",
+    },
+    "& .MuiButton-root": {
+      background: "#24BDC7",
+      height: "46px",
+      width: "100px",
+      borderRadius: "5px",
+      padding: "0",
+      marginTop: "10px",
+      marginBottom: "30px",
+      alignSelf: "center",
+      [theme.breakpoints.down("xs")]: {
+        margin: "0 auto",
+        marginTop: "48px",
+        width: "84px",
+      },
+    },
+  },
+  description: {
+    height: "150px !important",
+    maxWidth: "814px !important",
+    width: "100% !important",
+    [theme.breakpoints.down("xs")]: {
+      maxWidth: "351px !important",
+      width: "351px !important",
+      marginTop: "18px !important",
+    },
+  },
+  closeButton: {
+    justifyContent: "flex-end",
+    padding: "8px",
+  },
+  Dialog: {
+    "& .MuiDialog-paper": {
+      width: "353px",
+      height: "224px",
+    },
+  },
+  DialogTitle: {
+    padding: "16px 16px 4px",
+    textAlign: "center",
+    "& .MuiTypography-h6": {
+      fontSize: "20px",
+      lineHeight: "28px",
+    },
+  },
+  DialogContent: {
+    textAlign: "center",
+    padding: "0 16px",
+    "& .MuiTypography-body1": {
+      fontSize: "14px",
+      lineHeight: "20px",
+      marginBottom: "0",
+    },
+  },
+}));
+
+export default memo(contact);
